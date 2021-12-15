@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  front:
+    image: ${DOCKER_REGISTRY-}front
+    build:
+      context: .
+      dockerfile: Front/Dockerfile
+    ports:
+      - "51000:50001"
+
+  front-dapr:
+    image: "daprio/daprd:latest"
+    command: ["./daprd", "-app-id", "Front", "-app-port", "80"]
+    depends_on:
+      - front
+    network_mode: "service:front"
+
+  back:
+    image: ${DOCKER_REGISTRY-}back
+    build:
+      context: .
+      dockerfile: Back/Dockerfile
+    ports:
+      - "52000:50001"
+
+  back-dapr:
+    image: "daprio/daprd:latest"
+    command: ["./daprd", "-app-id", "Back", "-app-port", "80"]
+    depends_on:
+      - back
+    network_mode: "service:back"
+

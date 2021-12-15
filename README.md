@@ -40,3 +40,7 @@ dapr init -k
 == APP == Counter = 27
 ...
 ```
+
+
+## Container 샘플
+* visual studio 에서 docker-compose 프로젝트를 시작으로 설정후 F5
