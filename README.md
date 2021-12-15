@@ -29,3 +29,14 @@ dapr init -k
 * Helm으로도 배포 가능
 * https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-deploy/#add-and-install-dapr-helm-chart
 
+
+## Counter 샘플
+```
+./dapr run --app-id DaprCounter -- dotnet run --project ./src/state
+```
+```
+...
+== APP == Counter = 26
+== APP == Counter = 27
+...
+```
