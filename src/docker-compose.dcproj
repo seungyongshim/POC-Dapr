@@ -9,8 +9,6 @@
     <DockerServiceName>back</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="BlazorFront\Pages\Counter.razor.cs" />
-    <None Include="BlazorFront\Pages\FetchData.razor.cs" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
