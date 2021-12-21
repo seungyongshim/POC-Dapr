@@ -1,0 +1,13 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+  namespace: default
+spec:
+  type: state.mysql
+  version: v1
+  metadata:
+  - name: connectionString
+    value: "root:example@tcp(db:3306)/?allowNativePasswords=true"  
+  - name: actorStateStore
+    value: "true"

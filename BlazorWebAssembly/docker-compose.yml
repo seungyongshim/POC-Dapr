@@ -28,12 +28,18 @@ services:
     build:
       context: .
       dockerfile: BlazorApp/Server/Dockerfile
+    ports:
+      - "51000:50001"
+
 
   blazorapp.server-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "Front", "-app-port", "80","-components-path","/components" ]
+    command: ["./daprd", "-app-id", "Front", "-app-port", "80","-components-path","/components", "-placement-host-address", "dapr-placement:50000"]
+    restart: always
     depends_on:
       - blazorapp.server
     network_mode: "service:blazorapp.server"
+    environment:
+      DAPR_PLACEMENT_HOST: dapr-placement
     volumes:
       - "./dapr/components/:/components"    
