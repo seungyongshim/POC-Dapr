@@ -12,13 +12,13 @@ namespace BlazorApp.Client.Pages
         private int currentCount = 0;
         private async Task IncrementCount()
         {
-            var ret = await HttpClient.GetStringAsync("Counter/Add");
+            var ret = await HttpClient.GetStringAsync("BackCounter/Add");
             currentCount = Convert.ToInt32(ret);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender) 
-        {
-            var ret = await HttpClient.GetStringAsync("Counter");
+        protected override async Task OnInitializedAsync()
+        { 
+            var ret = await HttpClient.GetStringAsync("BackCounter");
             currentCount = Convert.ToInt32(ret);
         }
     }

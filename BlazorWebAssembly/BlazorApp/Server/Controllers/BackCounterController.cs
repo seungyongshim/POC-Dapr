@@ -7,9 +7,9 @@ namespace BlazorApp.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CounterController : Controller
+    public class BackCounterController : Controller
     {
-        public CounterController(IActorProxyFactory actorProxy)
+        public BackCounterController(IActorProxyFactory actorProxy)
         {
             CounterActor = actorProxy.CreateActorProxy<ICounterActor>(new ActorId("1"), "CounterActor");
         }

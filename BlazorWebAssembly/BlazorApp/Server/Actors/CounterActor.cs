@@ -10,8 +10,12 @@ namespace BlazorApp.Server.Actors
 
         }
 
-        public Task<int> GetCountAsync() =>
-            StateManager.GetStateAsync<int>("Counter");
+        public async Task<int> GetCountAsync() =>
+            await StateManager.TryGetStateAsync<int>("Counter") switch
+            {
+                var ret when ret.HasValue is true => ret.Value,
+                _ => 0
+            };
 
         public Task<int> AddCounterAsync() =>
             StateManager.AddOrUpdateStateAsync<int>("Counter", 1, (s, v) => 1 + v);
