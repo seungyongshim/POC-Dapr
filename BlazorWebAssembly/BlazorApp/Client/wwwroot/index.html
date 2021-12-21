@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>BlazorApp</title>
   <base href="/" />
+  <link href="lib/font-awesome/css/all.min.css" rel="stylesheet" />
   <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="css/app.css" rel="stylesheet" />
   <link href="BlazorApp.Client.styles.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/font-awesome/css/all.min.css" />
+  
+  <script defer src="lib/font-awesome/js/all.min.js"></script>
 </head>
 
 <body>
   <div id="app">
     <div style="position:absolute; top:45vh; width:100%; text-align:center">
-      Loading...
+      <i class="fa fa-spinner fa-spin" style="font-size: 5vh"></i>
     </div>
   </div>
 
@@ -24,9 +26,8 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
   </div>
-  <script src="css/font-awesome/js/all.min.js"></script>
-  <script src="_framework/blazor.webassembly.js"></script>
 
+  <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>
