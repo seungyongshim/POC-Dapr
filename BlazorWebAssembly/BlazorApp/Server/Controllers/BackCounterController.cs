@@ -19,8 +19,10 @@ namespace BlazorApp.Server.Controllers
         [HttpGet]
         public async Task<int> Get()
         {
-            var ret = await CounterActor.GetCountAsync();
-            return ret;
+            var q = CounterActor.GetCountAsync().ToAff().Retry(Schedule.Recurs(10) | Schedule.Fibonacci(100 * milliseconds));
+                    
+            var ret = await q.Run();
+            return ret.ThrowIfFail();
         }
 
         [HttpGet("Add")]

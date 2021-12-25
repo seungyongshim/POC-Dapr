@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
-using System.Net.Http;
 
 namespace BlazorApp.Client.Pages
 {
@@ -9,7 +7,7 @@ namespace BlazorApp.Client.Pages
         [Inject]
         HttpClient HttpClient { get; set; }
 
-        private int currentCount = 0;
+        private int? currentCount;
         private async Task IncrementCount()
         {
             var ret = await HttpClient.GetStringAsync("BackCounter/Add");
@@ -17,7 +15,7 @@ namespace BlazorApp.Client.Pages
         }
 
         protected override async Task OnInitializedAsync()
-        { 
+        {
             var ret = await HttpClient.GetStringAsync("BackCounter");
             currentCount = Convert.ToInt32(ret);
         }

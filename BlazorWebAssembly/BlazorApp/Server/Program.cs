@@ -1,3 +1,5 @@
+global using LanguageExt;
+global using static LanguageExt.Prelude;
 using Microsoft.AspNetCore.ResponseCompression;
 using Dapr.Actors.Client;
 using BlazorApp.Server.Actors;
