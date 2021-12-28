@@ -8,6 +8,12 @@ public class AppDbContext : DbContext
 {
     public virtual DbSet<ActorStates> CounterActorStates { get; set; }
 
+    public virtual IQueryable<ActorStates> QueryCounterActorStates =>
+        CounterActorStates.FromSqlRaw(
+            "select * from state " +
+            "where MATCH(id) AGAINST('CounterActorState' IN BOOLEAN MODE)"
+            );
+
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }

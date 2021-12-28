@@ -24,8 +24,7 @@ namespace BlazorApp.Server.Controllers
         [HttpGet]
         public IEnumerable<ActorStates> Get()
         {
-            var sql = "select * from state";
-            var q = from x in DbContext.CounterActorStates.FromSqlRaw(sql)
+            var q = from x in DbContext.QueryCounterActorStates
                     select x;
 
             return q.ToList();
