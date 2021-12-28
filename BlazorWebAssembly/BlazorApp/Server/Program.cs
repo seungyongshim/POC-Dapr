@@ -16,7 +16,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(o =>
     o.UseMySql("Server=db;Database=dapr_state_store;Uid=root;Pwd=example;",
-               new MySqlServerVersion(new Version(8, 0, 27, 0)))
+               new MySqlServerVersion(new Version(8, 0, 27, 0)),
+               b => b.UseMicrosoftJson(MySqlCommonJsonChangeTrackingOptions.FullHierarchyOptimizedFast))
      .EnableDetailedErrors()
      .EnableSensitiveDataLogging());
 
