@@ -27,9 +27,10 @@ public class CounterActor : Actor, ICounterActor
 
     public async Task<int> AddCounterAsync()
     {
-        var q = from x in StateManager.AddOrUpdateStateAsync("CounterActorState",
-                                                             new CounterActorState(1),
-                                                             (s, v) => v with { Count = 1 + v.Count }).ToAff()
+        var q = from x in StateManager.AddOrUpdateStateAsync(
+                    "CounterActorState",
+                    new CounterActorState(1),
+                    (s, v) => v with { Count = 1 + v.Count }).ToAff()
                 from b in Eff(() => x.Count)
                 select b;
 

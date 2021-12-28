@@ -4,13 +4,6 @@
 
 <h1>Counter</h1>
 
-@if (currentCount is not null)
-{
-    <p role="status">Current count: @currentCount </p>
-}
-else
-{
-    <p role="status">Current count: </p>
-}
+<p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>

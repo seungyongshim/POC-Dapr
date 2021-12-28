@@ -7,17 +7,19 @@ namespace BlazorApp.Client.Pages
         [Inject]
         HttpClient HttpClient { get; set; }
 
-        private int? currentCount;
+        private int currentCount;
         private async Task IncrementCount()
         {
             var ret = await HttpClient.GetStringAsync("BackCounter/Add");
             currentCount = Convert.ToInt32(ret);
+            
         }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync() 
         {
             var ret = await HttpClient.GetStringAsync("BackCounter");
             currentCount = Convert.ToInt32(ret);
+            StateHasChanged();
         }
     }
 }
