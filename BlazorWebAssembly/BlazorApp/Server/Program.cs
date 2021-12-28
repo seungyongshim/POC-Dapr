@@ -1,8 +1,8 @@
 global using LanguageExt;
 global using static LanguageExt.Prelude;
-using Microsoft.AspNetCore.ResponseCompression;
-using Dapr.Actors.Client;
+using BlazorApp.Server;
 using BlazorApp.Server.Actors;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,11 @@ builder.Services.AddActors(options =>
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<AppDbContext>(o =>
+    o.UseMySql("Server=db;Database=dapr_state_store;Uid=root;Pwd=example;",
+               new MySqlServerVersion(new Version(8, 0, 27, 0)))
+     .EnableDetailedErrors()
+     .EnableSensitiveDataLogging());
 
 var app = builder.Build();
 

@@ -1,0 +1,8 @@
+GET http://127.0.0.1:3500/v1.0/healthz
+###
+
+POST http://127.0.0.1:3500/v1.0-alpha1/state/statestore/query
+content-type: application/json; charset=utf-8
+
+{}
+###

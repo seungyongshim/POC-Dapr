@@ -38,5 +38,3 @@ public class CounterActor : Actor, ICounterActor
         return r.ThrowIfFail();
     }
 }
-
-public record CounterActorState(int Count);

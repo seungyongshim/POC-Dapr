@@ -1,6 +1,21 @@
 version: '3.4'
 
 services:
+  seq:
+    image: datalust/seq
+    environment:
+      ACCEPT_EULA : Y
+    ports:
+      - 9090:80
+
+  seq-gelf-ingest:
+    image: datalust/seq-input-gelf
+    restart: always
+    environment:
+      SEQ_ADDRESS: "http://seq:5341"
+    ports:
+      - "12201:12201/udp"
+ 
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -18,7 +33,7 @@ services:
     image: redis:alpine
     
   dapr-placement:
-    image: "daprio/dapr:latest"    
+    image: "daprio/dapr:1.5.1"    
     command: ["./placement", "-port", "50000"]
     ports:
       - "50000:50000"
@@ -30,11 +45,18 @@ services:
       dockerfile: BlazorApp/Server/Dockerfile
     ports:
       - "51000:50001"
+    depends_on:
+      - seq-gelf-ingest
+    logging:
+      driver: "gelf"
+      options:
+        gelf-address: "udp://127.0.0.1:12201"
+        tag: "blazorapp.server"
 
 
   blazorapp.server-dapr:
-    image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "Front", "-app-port", "80","-components-path","/components", "-placement-host-address", "dapr-placement:50000"]
+    image: "daprio/daprd:1.5.1"
+    command: ["./daprd", "-app-id", "Front", "-app-port", "80", "-components-path","/components", "-placement-host-address", "dapr-placement:50000"]
     restart: always
     depends_on:
       - blazorapp.server
