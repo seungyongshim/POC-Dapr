@@ -1,23 +1,25 @@
+using MediatR;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorApp.Client.Pages
 {
-    public partial class Counter
+    public partial class Counter : IRequestHandler<CounterRequest>
     {
         [Inject]
         HttpClient HttpClient { get; set; }
 
         private int? currentCount;
-        private async Task IncrementCount()
-        {
-            var ret = await HttpClient.GetStringAsync("BackCounter/Add");
-            currentCount = Convert.ToInt32(ret);
-        }
+        private async Task IncrementCount() => await HttpClient.GetStringAsync("BackCounter/Add");
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync() => await HttpClient.GetStringAsync("BackCounter");
+
+        public Task<Unit> Handle(CounterRequest request, CancellationToken cancellationToken)
         {
-            var ret = await HttpClient.GetStringAsync("BackCounter");
-            currentCount = Convert.ToInt32(ret);
+            currentCount = request.Count;
+            StateHasChanged();
+            return Unit.Task;
         }
     }
+
+    public record CounterRequest(int Count) : IRequest;
 }

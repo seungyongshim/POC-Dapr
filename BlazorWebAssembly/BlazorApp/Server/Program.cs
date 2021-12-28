@@ -3,6 +3,7 @@ global using static LanguageExt.Prelude;
 using Microsoft.AspNetCore.ResponseCompression;
 using Dapr.Actors.Client;
 using BlazorApp.Server.Actors;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddActors(options =>
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -33,6 +35,10 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseEndpoints(endpoint =>
+{
+    endpoint.MapHub<ServerHub>("/Hub");
+});
 
 app.MapActorsHandlers();
 app.MapRazorPages();
