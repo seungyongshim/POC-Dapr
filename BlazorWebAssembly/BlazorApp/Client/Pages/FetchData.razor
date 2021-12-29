@@ -16,20 +16,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Id</th>
+                <th>UpdateTime (Local)</th>
+                <th>UpdateTime (UTC)</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var item in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@item.Id</td>
+                    <td>@item.UpdateDate.ToLocalTime()</td>
+                    <td>@item.UpdateDate</td>
+                    <td>@item.Value</td>
                 </tr>
             }
         </tbody>

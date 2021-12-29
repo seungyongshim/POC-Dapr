@@ -6,12 +6,12 @@ using Dapr.Actors;
 namespace BlazorApp.Server.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class BackCounterController : Controller
+[Route("/Backend/[controller]")]
+public class CounterController : Controller
 {
-    public BackCounterController(IActorProxyFactory actorProxy)
+    public CounterController(IActorProxyFactory actorProxy)
     {
-        CounterActor = actorProxy.CreateActorProxy<ICounterActor>(new ActorId("1"), "CounterActor");
+        CounterActor = actorProxy.CreateActorProxy<ICounterActor>(new ActorId("2"), "CounterActor");
     }
 
     public ICounterActor CounterActor { get; }
@@ -22,7 +22,7 @@ public class BackCounterController : Controller
         var q = from x in CounterActor.GetCountAsync().ToAff()
                 select x;
 
-        var r = await q.Retry(Schedule.Recurs(10) | Schedule.Fibonacci(100 * milliseconds)).Run();
+        var r = await q.Retry(Schedule.Recurs(3) | Schedule.Fibonacci(100 * milliseconds)).Run();
         return r.ThrowIfFail();
     }
 
@@ -32,7 +32,7 @@ public class BackCounterController : Controller
         var q = from x in CounterActor.AddCounterAsync().ToAff()
                 select x;
 
-        var r = await q.Retry(Schedule.Recurs(10) | Schedule.Fibonacci(100 * milliseconds)).Run();
+        var r = await q.Retry(Schedule.Recurs(3) | Schedule.Fibonacci(100 * milliseconds)).Run();
         return r.ThrowIfFail();
     }
 }

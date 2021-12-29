@@ -1,3 +1,4 @@
+using BlazorApp.Shared;
 using Dapr.Actors.Runtime;
 
 namespace BlazorApp.Server.Actors;
@@ -20,7 +21,7 @@ public class CounterActor : Actor, ICounterActor
                 })
                 select b;
 
-        var r = await q.Retry(Schedule.Recurs(10) | Schedule.Fibonacci(100 * milliseconds)).Run();
+        var r = await q.Retry(Schedule.Recurs(3) | Schedule.Fibonacci(100 * milliseconds)).Run();
 
         return r.ThrowIfFail();
     }
@@ -34,7 +35,7 @@ public class CounterActor : Actor, ICounterActor
                 from b in Eff(() => x.Count)
                 select b;
 
-        var r = await q.Retry(Schedule.Recurs(10) | Schedule.Fibonacci(100 * milliseconds)).Run();
+        var r = await q.Retry(Schedule.Recurs(3) | Schedule.Fibonacci(100 * milliseconds)).Run();
         return r.ThrowIfFail();
     }
 }
