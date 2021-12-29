@@ -10,16 +10,13 @@
 }
 else
 {
-    <table class="min-w-full table">
+    <table class="table">
         <thead>
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Id</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UpdateTime (Local)</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UpdateTime (UTC)</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detail</th>
-                <th scope="col" class="relative px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                </th>
+                <th scope="col">Id</th>
+                <th scope="col">UpdateTime (Local)</th>
+                <th scope="col">UpdateTime (UTC)</th>
+                <th scope="col">Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -30,13 +27,11 @@ else
                     <td>@item.UpdateDate.ToLocalTime()</td>
                     <td>@item.UpdateDate</td>
                     <td>@item.Value</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+
 
 

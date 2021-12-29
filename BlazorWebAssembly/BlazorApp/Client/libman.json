@@ -2,13 +2,6 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
-    {
-      "library": "font-awesome@5.15.4",
-      "destination": "wwwroot/lib/font-awesome/"
-    },
-    {
-      "library": "tailwindcss@2.2.19",
-      "destination": "wwwroot/lib/tailwindcss/"
-    }
+   
   ]
 }
