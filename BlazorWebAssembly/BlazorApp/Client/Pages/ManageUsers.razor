@@ -1,0 +1,35 @@
+@page "/ManageUsers"
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<button class="btn btn-danger me-md-2" @onclick="DeleteUserHandle" disabled="@disabled">삭제</button>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">법인</th>
+            <th scope="col">부서</th>
+            <th scope="col">이름</th>
+            <th scope="col">이메일</th>
+            <th scope="col">사용목적</th>
+            <th scope="col">사용기간</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in userActorState)
+        {
+        <tr>
+            <td><input @onclick="ClickCheckboxHandle" @bind="item.Check" class="form-check-input" type="checkbox" id="flexCheckDefault"></td>
+            <td>@item.State.Value.Company.Name</td>
+            <td>@item.State.Value.Department.Name</td>
+            <td>@item.State.Value.BackOfficeUser.Name</td>
+            <td>@item.State.Value.BackOfficeUser.Email.Value</td>
+            <td>@item.State.Value.Reason</td>
+            <td>@item.State.InsertDate.ToLocalTime().ToShortDateString() ~ @item.State.Value.DueDate.ToLocalTime().ToShortDateString()</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+

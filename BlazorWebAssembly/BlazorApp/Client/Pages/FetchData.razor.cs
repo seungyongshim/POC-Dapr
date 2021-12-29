@@ -1,4 +1,4 @@
-using System.Net.Http.Json;
+global using System.Net.Http.Json;
 using BlazorApp.Shared;
 using Microsoft.AspNetCore.Components;
 
