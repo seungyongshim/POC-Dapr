@@ -8,12 +8,16 @@ public partial class ManageUsers
     [Inject]
     private HttpClient HttpClient { get; set; }
 
-    private IList<(bool Check, ActorState<UserActorState> State)> userActorState = Enumerable.Empty<(bool, ActorState<UserActorState>)>().ToArray();
+    private IList<Cell> userActorState = Enumerable.Empty<Cell>().ToArray();
 
     protected override async Task OnInitializedAsync()
     {
         var q = from a in await HttpClient.GetFromJsonAsync<IEnumerable<ActorState<UserActorState>>>("b/ManageUsers")
-                select (false, a);
+                select new Cell
+                {
+                    Checked = false,
+                    State = a
+                };
 
         userActorState = q.ToList();
         base.OnInitializedAsync();
@@ -24,19 +28,28 @@ public partial class ManageUsers
 
     }
 
-    private void ClickCheckboxHandle()
+    private void ClickCheckboxHandle(ChangeEventArgs e, string id)
     {
-        if(userActorState.Any(x => x.Check is true))
+        var q = from a in userActorState
+                where a.State.Id == id
+                select a;
+
+        foreach (var item in q)
         {
-            disabled = "";
+            item.Checked = (bool)e.Value;
         }
-        else
-        {
-            disabled = "disabled";
-        }
+
+        disabled = userActorState.Any(x => x.Checked) is not true;
 
         StateHasChanged();
     }
 
-    string disabled = "disabled";
+    private bool disabled = true;
 }
+
+public class Cell
+{
+    public bool Checked { get; set; }
+    public ActorState<UserActorState> State { get; init; }
+}
+

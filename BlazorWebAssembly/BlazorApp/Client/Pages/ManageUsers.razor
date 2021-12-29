@@ -19,7 +19,7 @@
         @foreach (var item in userActorState)
         {
         <tr>
-            <td><input @onclick="ClickCheckboxHandle" @bind="item.Check" class="form-check-input" type="checkbox" id="flexCheckDefault"></td>
+            <td><input @onchange="@(e => ClickCheckboxHandle(e, item.State.Id))" type="checkbox" class="form-check-input" value="@item.Checked"></td>
             <td>@item.State.Value.Company.Name</td>
             <td>@item.State.Value.Department.Name</td>
             <td>@item.State.Value.BackOfficeUser.Name</td>
