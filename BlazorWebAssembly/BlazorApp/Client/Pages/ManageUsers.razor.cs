@@ -25,7 +25,15 @@ public partial class ManageUsers
 
     private void DeleteUserHandle()
     {
+        var q = from a in userActorState
+                where a.Checked is false
+                select a;
 
+        userActorState = q.ToList();
+
+        disabled = userActorState.Any(x => x.Checked) is not true;
+
+        StateHasChanged();
     }
 
     private void ClickCheckboxHandle(ChangeEventArgs e, string id)
@@ -42,6 +50,11 @@ public partial class ManageUsers
         disabled = userActorState.Any(x => x.Checked) is not true;
 
         StateHasChanged();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
     }
 
     private bool disabled = true;

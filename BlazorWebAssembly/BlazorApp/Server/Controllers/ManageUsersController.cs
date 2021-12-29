@@ -20,7 +20,15 @@ public class ManageUsersController : Controller
                     new BackOfficeUser("홍사모", new Email("xxx@nexon.com")),
                     "시험사용",
                     DateTime.UtcNow + (360 * days)
-                    ))
+                    )),
+            new ActorState<UserActorState>("2", DateTime.UtcNow, DateTime.UtcNow,
+                new UserActorState(
+                    new Company("Nexon", "넥슨코리아"),
+                    new Department("AF", "심심"),
+                    new BackOfficeUser("홍길동", new Email("bbb@nexon.com")),
+                    "시험사용",
+                    DateTime.UtcNow + (360 * days)
+                    )),
         };
     }
 }
