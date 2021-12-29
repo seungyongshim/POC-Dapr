@@ -32,7 +32,7 @@ public class CounterActor : Actor, ICounterActor
 
         var r = await q.Retry(Schedule.Recurs(3) | Schedule.Fibonacci(100 * milliseconds)).Run();
 
-        return r.ThrowIfFail();
+        return r.IfFail(e => 0);
     }
 
     public async Task<int> AddCounterAsync()
