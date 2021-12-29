@@ -6,7 +6,7 @@ using Dapr.Actors;
 namespace BlazorApp.Server.Controllers;
 
 [ApiController]
-[Route("/Backend/[controller]")]
+[Route("/b/[controller]")]
 public class CounterController : Controller
 {
     public CounterController(IActorProxyFactory actorProxy)

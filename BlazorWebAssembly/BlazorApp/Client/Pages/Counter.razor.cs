@@ -10,12 +10,12 @@ namespace BlazorApp.Client.Pages
         private string currentCount;
         private async Task IncrementCount()
         {
-            currentCount = await HttpClient.GetStringAsync("Backend/Counter/Add");
+            currentCount = await HttpClient.GetStringAsync("b/Counter/Add");
         }
 
         protected override async Task OnInitializedAsync() 
         {
-            currentCount = await HttpClient.GetStringAsync("Backend/Counter");
+            currentCount = await HttpClient.GetStringAsync("b/Counter");
             StateHasChanged();
         }
     }

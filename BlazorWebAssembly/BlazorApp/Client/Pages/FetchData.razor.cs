@@ -12,7 +12,7 @@ namespace BlazorApp.Client.Pages
         private ActorState<CounterActorState>[]? forecasts;
         protected override async Task OnInitializedAsync()
         {
-            forecasts = await Http.GetFromJsonAsync<ActorState<CounterActorState>[]>("Backend/FetchData");
+            forecasts = await Http.GetFromJsonAsync<ActorState<CounterActorState>[]>("b/FetchData");
         }
     }
 }

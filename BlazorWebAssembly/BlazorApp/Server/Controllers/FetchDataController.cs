@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BlazorApp.Server.Controllers
 {
     [ApiController]
-    [Route("/Backend/[controller]")]
+    [Route("/b/[controller]")]
     public class FetchDataController : ControllerBase
     {
         public FetchDataController(AppDbContext dbContext)
